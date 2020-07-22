@@ -31,25 +31,21 @@ function Repos(props) {
       <h2>REPOS</h2>
       <div style={{display: expandIssues ? 'flex' : 'block'}}>
         <div>
-          {repos && repos.map(
-            repo => {
-              return (
-                <>
-                <div 
-                  style={{border:'1px solid black', padding:'1em', display:'flex'}}
-                  onClick={() => {
-                    setExpandIssues(true)
-                    setSelectedRepo(repo.name)
-                    localStorage.setItem("expandedView", true)
-                    localStorage.setItem("selectedRepo", repo.name)
-                  }}
-                >
-                {repo.name}
-                </div>
-                </>
-              )
-            }
-            )}
+          {repos && repos.map((repo, index) => (
+            <div 
+              key={index}
+              style={{border:'1px solid black', padding:'1em', display:'flex'}}
+              onClick={() => {
+                setExpandIssues(true)
+                setSelectedRepo(repo.name)
+                localStorage.setItem("expandedView", true)
+                localStorage.setItem("selectedRepo", repo.name)
+              }}
+            >
+              {repo.name}
+            </div>
+            )
+          )}
         </div>
       {expandIssues && <RepoIssues repoName={selectedRepo}/>}
       </div>

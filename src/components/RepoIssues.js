@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import ReactTimeAgo from 'react-time-ago'
- 
-const dateFormat = require('dateformat');
+import Issue from "./Issue"
 
+import axios from 'axios'
+ 
 const initialDnDState = {
   draggedFrom: null,
   draggedTo: null,
@@ -20,8 +19,6 @@ const RepoIssues = (props) => {
   const [list, setList] = useState(JSON.parse(localStorage.getItem(`${repo}`)))
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
    
-  const placeholderImg = "https://w5insight.com/wp-content/uploads/2014/07/placeholder-user-400x400-300x300.png"
-
   // onDragStart fires when an element starts being dragged
   const onDragStart = (event) => {
     const initialPosition = Number(event.currentTarget.dataset.position);
@@ -115,33 +112,18 @@ const RepoIssues = (props) => {
   return(
     <section>
       <ol>
-      {list && list.map( (issue, index) => {
-        let createdAt = issue.created_at
-        return(
-          <li
-            style={{background: "pink"}}
+        {list && list.length > 0 ? (list.map( (issue, index) => {
+          return <Issue 
+            issue={issue} 
             key={index}
-            data-position={index}
-            draggable
-            onDragStart={onDragStart}
+            index={index} 
+            onDragStart={onDragStart} 
             onDragOver={onDragOver}
             onDrop={onDrop}
-            onDragLeave={onDragLeave}
-            className={dragAndDrop && dragAndDrop.draggedTo=== Number(index) ? "dropArea" : ""}
-            >
-            <p>{issue.assignees.length > 0 ? 'Assignees' : 'No one assigned'}</p>
-              {issue.assignees.length > 0 ? issue.assignees.map((assignee, index) => (
-                <img src={assignee.avatar_url} key={index} height="40px" alt="github user" />
-                )) : (
-                <img src={placeholderImg} height="40px" alt="github user" />
-                )}         
-            <p>{issue.title}</p>
-            <p><span>Created </span>{dateFormat(createdAt, "shortDate")}</p>
-            <p><span>Updated </span><ReactTimeAgo date={issue.updated_at}/></p>
-            <i class="fas fa-arrows-alt-v"></i>
-            </li>
-        )
-      })}
+            onDragLeave={onDragLeave} 
+            dragAndDrop={dragAndDrop} />
+          })) : <p>this repo doesn't have any issues</p>
+        }
       </ol>
     </section>
   )

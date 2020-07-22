@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router'
 import { useDispatch, useSelector } from "react-redux"
 import axios from 'axios'
@@ -6,7 +6,6 @@ import axios from 'axios'
 
 function TokenInput() {
   const [ authenticated, setAuthenticated ] = useState(false)
-  const [ sendRequest, setSendRequest ] = useState(false)
   const githubKey = useSelector(state => state.githubKey)
   const error = useSelector(state => state.error)
   const dispatch = useDispatch();
