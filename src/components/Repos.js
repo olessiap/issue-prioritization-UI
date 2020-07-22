@@ -4,10 +4,10 @@ import axios from 'axios'
 import { useDispatch } from "react-redux"
 
 function Repos(props) {
-  const expandedView = localStorage.getItem("expandedView") === 'true' ? true : false 
-  const [ expandIssues, setExpandIssues ] = useState(expandedView)
   const [ repos, setRepos ] = useState(null)
   const [ selectedRepo, setSelectedRepo] = useState(null)
+  //initialize active repo class to null OR whatever id is in LS
+  const [ activeId, setActiveId ] = useState(localStorage.getItem("expandedRepoId") !== null ? JSON.parse(localStorage.getItem("expandedRepoId")) : null)
   
   const dispatch = useDispatch()
   const githubKey = props.location.state.githubKey
@@ -27,28 +27,30 @@ function Repos(props) {
   }, [])
 
   return(
-    <div>
-      <h2>REPOS</h2>
-      <div style={{display: expandIssues ? 'flex' : 'block'}}>
-        <div>
-          {repos && repos.map((repo, index) => (
-            <div 
-              key={index}
-              style={{border:'1px solid black', padding:'1em', display:'flex'}}
-              onClick={() => {
-                setExpandIssues(true)
-                setSelectedRepo(repo.name)
-                localStorage.setItem("expandedView", true)
-                localStorage.setItem("selectedRepo", repo.name)
-              }}
-            >
-              {repo.name}
-            </div>
-            )
-          )}
+    <div className="mainContainer">
+      <section>
+        <div className={activeId !== null ? "expandedView" : "defaultView"}>
+          <ul>
+          <h1>repositories</h1>
+            {repos && repos.map((repo, index) => (
+              <li
+                key={index}
+                className={`repoListItem ${index === activeId ? "activeButton" : ''}`}
+                onClick={() => {
+                  setSelectedRepo(repo.name)
+                  setActiveId(index)
+                  localStorage.setItem("expandedRepoId", index)
+                  localStorage.setItem("selectedRepo", repo.name)
+                }}
+              >
+                {repo.name}
+              </li>
+              )
+              )}
+          </ul>
+        {activeId !== null && <RepoIssues repoName={selectedRepo}/>}
         </div>
-      {expandIssues && <RepoIssues repoName={selectedRepo}/>}
-      </div>
+      </section>
     </div>
   )
 }
