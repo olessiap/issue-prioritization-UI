@@ -1,22 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import RepoIssues from './RepoIssues'
-import uuid from "react-uuid"
+import axios from 'axios'
+import { useDispatch } from "react-redux"
 
-const repoList = () => {
-  return (
-    {id:uuid(), name:"Cool Repo Title"}
-  )
-}
-function Repos() {
-  const [ expandIssues, setExpandIssues ] = useState(false)
-  const [ selectedRepoId, setSelectedRepoId ] = useState(null)
+function Repos(props) {
+  const expandedView = localStorage.getItem("expandedView") === 'true' ? true : false 
+  const [ expandIssues, setExpandIssues ] = useState(expandedView)
+  const [ repos, setRepos ] = useState(null)
+  const [ selectedRepo, setSelectedRepo] = useState(null)
+  
+  const dispatch = useDispatch()
+  const githubKey = props.location.state.githubKey
+
+  useEffect(() => { 
+    axios.get(`https://api.github.com/user/repos`,{
+      headers: {
+        'Authorization': `token ${githubKey}`
+      }
+    })
+    .then((res) => {
+        setRepos(res.data)
+    })
+    .catch((error) => {
+      dispatch({type: "ERROR", payload:error})
+    })
+  }, [])
 
   return(
     <div>
       <h2>REPOS</h2>
       <div style={{display: expandIssues ? 'flex' : 'block'}}>
         <div>
-          {Array.from({length: 5}, () => repoList()).map(
+          {repos && repos.map(
             repo => {
               return (
                 <>
@@ -24,7 +39,9 @@ function Repos() {
                   style={{border:'1px solid black', padding:'1em', display:'flex'}}
                   onClick={() => {
                     setExpandIssues(true)
-                    setSelectedRepoId(repo.id)
+                    setSelectedRepo(repo.name)
+                    localStorage.setItem("expandedView", true)
+                    localStorage.setItem("selectedRepo", repo.name)
                   }}
                 >
                 {repo.name}
@@ -34,7 +51,7 @@ function Repos() {
             }
             )}
         </div>
-      {expandIssues && <RepoIssues id={selectedRepoId}/>}
+      {expandIssues && <RepoIssues repoName={selectedRepo}/>}
       </div>
     </div>
   )

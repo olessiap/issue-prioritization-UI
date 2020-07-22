@@ -6,6 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducer/reducer'
+import JavascriptTimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+ 
+JavascriptTimeAgo.addLocale(en)
 
 const store = createStore(
   reducer

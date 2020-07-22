@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={TokenInput} /> 
-          {/* <Route exact path="/repos/:repo_id" component={RepoIssues} /> */}
+          <Route exact path="/repos/:repo_id" component={RepoIssues} />
           <Route path="/repos" component={Repos} />
         </Switch>
       </Router>
