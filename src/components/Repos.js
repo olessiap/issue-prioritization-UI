@@ -31,7 +31,7 @@ function Repos(props) {
       <section>
         <div className={activeId !== null ? "expandedView" : "defaultView"}>
           <ul>
-          <h1>repositories</h1>
+          <h1 style={{paddingTop: '0.3em'}}>repositories</h1>
             {repos && repos.map((repo, index) => (
               <li
                 key={index}

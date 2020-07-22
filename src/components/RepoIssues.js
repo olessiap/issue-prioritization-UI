@@ -114,8 +114,8 @@ const RepoIssues = (props) => {
     <section className="issuesSection">
       <div className="floatingContainer">
         <h1>{repo} issues</h1>
-        {list && list.length > 0 && (
-            <p>drag and drop issues to prioratize in the upcoming sprint</p>
+        {list && list.length > 1 && (
+            <p className="orderInstructions">drag and drop issues to prioratize in the upcoming sprint</p>
       )}
         <ul>
           {list && list.length > 0 ? (list.map( (issue, index) => {
@@ -132,7 +132,7 @@ const RepoIssues = (props) => {
             })) : <p className="noIssuesMessage">this repo doesn't have any open issues</p>
           }
         </ul>
-      </div>
+    </div>
     </section>
     </>
   )
