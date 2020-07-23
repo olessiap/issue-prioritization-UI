@@ -1,0 +1,33 @@
+.tokenContainer {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:500px;
+}
+
+.mainContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.expandedView {
+  display:flex;
+  justify-content: center;
+  @media (max-width: $breakpoint-tablet) {
+    display:block;
+
+    ul {
+      height: 44vh;
+      overflow: scroll;
+    }
+  }
+}
+
+.defaultview {
+  display:block;
+}
+
+.floatingContainer {
+  position: sticky;
+  top: 0;
+}

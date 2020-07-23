@@ -3,7 +3,6 @@ import ReactTimeAgo from 'react-time-ago'
 
 const dateFormat = require('dateformat');
 
-
 const Issue = ({ issue, repo, index, onDragStart, onDragOver, onDrop, onDragLeave, dragAndDrop }) => {
   const placeholderImg = "https://w5insight.com/wp-content/uploads/2014/07/placeholder-user-400x400-300x300.png"
   let createdAt = issue.created_at
@@ -32,10 +31,10 @@ const Issue = ({ issue, repo, index, onDragStart, onDragOver, onDrop, onDragLeav
             <p className="issue-title">{issue.title}</p>
           </div>
         </div>
-      <div className="dates-wrapper">
-        <p>Created {dateFormat(createdAt, "shortDate")}</p>
-        <p>Updated {<ReactTimeAgo date={updatedAt}/>}</p>
-      </div>
+        <div className="dates-wrapper">
+          <p>Created {dateFormat(createdAt, "shortDate")}</p>
+          <p>Updated {<ReactTimeAgo date={updatedAt}/>}</p>
+        </div>
       </div>
     </li>
   )

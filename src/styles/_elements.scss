@@ -1,0 +1,34 @@
+body {
+  font-size: 1em;
+  font-family:"HeeboLight";
+}
+
+h1, h2{
+  text-align: center;
+  padding-bottom:.5em;
+  font-size: 1.5em;
+}
+
+h1 {
+  font-family: "HeeboBold";
+}
+
+a {
+  display:block;
+  text-align: center;
+  text-decoration: none;
+  color:$blue;
+  padding:.5em;
+  &:hover {
+    color: $lightblue;
+  }
+}
+
+input {
+  padding: 1em 3.5em;
+  margin-bottom: 1em;
+  text-align: center;
+  &::placeholder {
+    text-align: center;
+  }
+}

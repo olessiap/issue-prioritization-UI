@@ -1,0 +1,18 @@
+$blue: #687bf7;
+$lightblue: #72d9ef;
+$cyan: #79e7eb;
+$breakpoint-tablet: 768px;
+
+@font-face {
+  font-family: 'HeeboLight';
+  src: url("../fonts/Heebo-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family:'HeeboMedium';
+  src: url("../fonts/Heebo-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family:'HeeboBold';
+  src: url("../fonts/Heebo-Bold.ttf") format("truetype");
+}

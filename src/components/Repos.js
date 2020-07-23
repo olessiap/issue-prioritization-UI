@@ -12,6 +12,7 @@ function Repos(props) {
   const dispatch = useDispatch()
   const githubKey = props.location.state.githubKey
 
+  //call repos on each rerender
   useEffect(() => { 
     axios.get(`https://api.github.com/user/repos`,{
       headers: {

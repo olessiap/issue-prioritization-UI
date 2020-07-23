@@ -115,24 +115,24 @@ const RepoIssues = (props) => {
       <div className="floatingContainer">
         <h1>{repo} issues</h1>
         {list && list.length > 1 && (
-            <p className="orderInstructions">drag and drop issues to prioratize in the upcoming sprint</p>
-      )}
-        <ul>
-          {list && list.length > 0 ? (list.map( (issue, index) => {
-            return <Issue 
-              issue={issue} 
-              repo={repo}
-              key={index}
-              index={index} 
-              onDragStart={onDragStart} 
-              onDragOver={onDragOver}
-              onDrop={onDrop}
-              onDragLeave={onDragLeave} 
-              dragAndDrop={dragAndDrop} />
-            })) : <p className="noIssuesMessage">this repo doesn't have any open issues</p>
-          }
-        </ul>
-    </div>
+          <p className="orderInstructions">drag and drop issues to prioratize in the upcoming sprint</p>
+        )}
+          <ul>
+            {list && list.length > 0 ? (list.map( (issue, index) => {
+              return <Issue 
+                issue={issue} 
+                repo={repo}
+                key={index}
+                index={index} 
+                onDragStart={onDragStart} 
+                onDragOver={onDragOver}
+                onDrop={onDrop}
+                onDragLeave={onDragLeave} 
+                dragAndDrop={dragAndDrop} />
+              })) : <p className="noIssuesMessage">this repo doesn't have any open issues</p>
+            }
+          </ul>
+      </div>
     </section>
     </>
   )
