@@ -10,14 +10,15 @@ function Repos(props) {
   const [ activeId, setActiveId ] = useState(localStorage.getItem("expandedRepoId") !== null ? JSON.parse(localStorage.getItem("expandedRepoId")) : null)
   
   const dispatch = useDispatch()
-  const githubKey = props.location.state.githubKey
+  // const githubKey = props.location.state.githubKey
+  const userName = localStorage.getItem("user")
 
   //call repos on each rerender
   useEffect(() => { 
-    axios.get(`https://api.github.com/user/repos`,{
-      headers: {
-        'Authorization': `token ${githubKey}`
-      }
+    axios.get(`https://api.github.com/users/${userName}/repos`,{
+      // headers: {
+      //   'Authorization': `token ${githubKey}`
+      // }
     })
     .then((res) => {
         setRepos(res.data)

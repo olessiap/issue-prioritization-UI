@@ -13,7 +13,8 @@ const initialDnDState = {
  
 const RepoIssues = (props) => {
   const repo = localStorage.getItem("selectedRepo")
-  const user = localStorage.getItem("user") 
+  const userName = localStorage.getItem("user") 
+
 
    //initialize list to whatever is in LS 
   const [list, setList] = useState(JSON.parse(localStorage.getItem(`${repo}`)))
@@ -88,7 +89,7 @@ const RepoIssues = (props) => {
   useEffect(() => {
     let isCurrent = true
     if(localStorage.getItem(`${repo}`) == null) {
-      axios.get(`https://api.github.com/repos/${user}/${repo}/issues`)
+      axios.get(`https://api.github.com/repos/${userName}/${repo}/issues`)
       .then((res) => {
         if(isCurrent){
           setList(res.data)  
